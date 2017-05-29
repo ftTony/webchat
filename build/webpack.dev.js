@@ -24,36 +24,46 @@ let devConfig = {
         publicPath: "/" //访问的目录
     },
     module: {
-        rules: [{
-            // test: /\.(sa|c|sa)ss$/,
-            test: /\.s[ac]ss$/,
-            // test: /\.css$/,
-            use: [
-                'style-loader',
-                {
-                    loader: 'css-loader',
+        rules: [
+            {
+                // test: /\.(sa|c|sa)ss$/,
+                // test: /\.s[ac]ss$/,
+                test: /\.css$/,
+                use: [
+                  "style-loader",
+                  {
+                    loader: "css-loader",
                     options: { sourceMap: true }
-                },
-                {
-                    loader: 'postcss-loader',
+                  },
+                  {
+                    loader: "postcss-loader",
                     options: {
-                        ident: 'postcss',
-                        sourceMap: true,
-                        plugins: [
-                            require('autoprefixer')({
-                                'browsers': ['>1%', 'last 2 versions']
-                            }),
-                            require('postcss-cssnext')(),
-                            require('cssnano')()
-                        ]
+                      plugins: [require("autoprefixer")]
                     }
-                },
-                {
-                    loader: 'sass-loader',
+                  }
+                ]
+              },
+              {
+                test: /\.scss$/,
+                use: [
+                  "style-loader",
+                  {
+                    loader: "css-loader",
                     options: { sourceMap: true }
-                }
-            ]
-        }]
+                  },
+                  {
+                    loader: "sass-loader",
+                    options: { sourceMap: true }
+                  },
+                  {
+                    loader: "postcss-loader",
+                    options: {
+                      plugins: [require("autoprefixer")]
+                    }
+                  }
+                ]
+              }
+        ]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin() //引入热更新插件

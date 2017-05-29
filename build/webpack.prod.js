@@ -15,34 +15,42 @@ let prodConfig = {
     module: {
         rules: [
             {
-                test: /\.s[ac]ss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: { sourceMap: true }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            sourceMap: true,
-                            plugins: [
-                                require('autoprefixer')({
-                                    'browsers': ['>1%', 'last 2 versions']
-                                }),
-                                require('postcss-cssnext')(),
-                                require('cssnano')()
-                            ]
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: { sourceMap: true }
-                    }
-                ]
+              test: /\.css$/,
+              use: [
+                MiniCssExtractPlugin.loader,
+                {
+                  loader: "css-loader",
+                  options: { sourceMap: true }
+                },
+                {
+                  loader: "postcss-loader",
+                  options: {
+                    plugins: [require("autoprefixer")]
+                  }
+                }
+              ]
+            },
+            {
+              test: /\.scss$/,
+              use: [
+                MiniCssExtractPlugin.loader,
+                {
+                  loader: "css-loader",
+                  options: { sourceMap: true }
+                },
+                {
+                  loader: "sass-loader",
+                  options: { sourceMap: true }
+                },
+                {
+                  loader: "postcss-loader",
+                  options: {
+                    plugins: [require("autoprefixer")]
+                  }
+                }
+              ]
             }
-        ]
+          ]
     },
     plugins: [
         new MiniCssExtractPlugin({
