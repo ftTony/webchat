@@ -93,7 +93,7 @@ io.on("connection", socket => {
   });
 });
 
-app.use(koaStatic(path.join(__dirname, '../publice')));
+app.use(koaStatic(path.join(__dirname, '../public')));
 app.use(bodyParser());
 // app.use(koaSession(SESSION_CONFIG))
 

@@ -364,15 +364,15 @@ CREATE TABLE   IF NOT EXISTS  `user` (
 
 #### 6.1 登录页面
 
-![images](./publice/login.png)
+![images](./public/login.png)
 
 #### 6.2 群聊页面
 
-![images](./publice/chatting.png)
+![images](./public/chatting.png)
 
 #### 6.3 智能聊天页面
 
-![images](./publice/ai.png)
+![images](./public/ai.png)
 
 ### 联系我
 
