@@ -129,8 +129,26 @@ a{
             }
             b:hover{
                 transform:rotate(-10deg);
+                transition:.3s ease-in-out;
             }
         }
+        p.copyright{
+            text-indent:0;
+        }
+        div{
+            padding-left: 50px;
+        }
+        .help{
+            padding:0;
+            width:100%;
+            img{
+                width:100%;
+                height:auto;
+            }
+        }
+    }
+    @media screen and (min-width:760px){
+        
     }
 }
 </style>
