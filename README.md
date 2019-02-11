@@ -77,6 +77,8 @@ server {
       proxy_set_header   X-NginX-Proxy    true;
       proxy_set_header   Connection "upgrade";
       proxy_http_version 1.1;
+      # 路径重写
+		rewrite  /api/(.*)  /$1  break;
       proxy_pass         http://localhost:9090;
    }
 }
@@ -115,6 +117,8 @@ server {
       proxy_set_header   X-NginX-Proxy    true;
       proxy_set_header   Connection "upgrade";
       proxy_http_version 1.1;
+      # 路径重写
+		rewrite  /api/(.*)  /$1  break;
       proxy_pass         http://localhost:9090;
    }
 }

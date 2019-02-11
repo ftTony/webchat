@@ -13,7 +13,7 @@ let devConfig = {
         historyApiFallback: true,
         proxy: {
             '/api': {
-                target: 'http://localhost:9090/',
+                target: 'http://localhost:3000/',
                 ws: true,
                 changeOrigin: true,
                 pathRewrite: {
