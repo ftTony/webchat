@@ -33,7 +33,28 @@ const toLogin = () => {
  * 请求失败后的错误统一处理
  */
 const errorHandle = (status, other) => {
-
+    // 状态码判断
+    switch (status) {
+        // 401:未登录状态，跳转登录页
+        case 401:
+            toLogin();
+            break;
+        // 403 token 过期
+        case 403:
+            tip('登录过期，请重新登录');
+            localStorage.removeItem('loginSuccess', null);
+            store.commit('loginSuccess', null);
+            setTimeout(() => {
+                toLogin();
+            }, 1000);
+            break;
+        // 404请求不存在
+        case 404:
+            tip('请求的资源不存在');
+            break;
+        default:
+            console.log(other);
+    }
 }
 
 // 创建 axios实例
