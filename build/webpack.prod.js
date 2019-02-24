@@ -4,6 +4,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const merge = require('webpack-merge');
 const base = require('./webpack.base.js');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 let prodConfig = {
     mode: 'production',
     output: {
@@ -66,6 +67,7 @@ let prodConfig = {
                 }
             }
         }),
+        new CleanWebpackPlugin(),
         new OptimizeCssAssetsPlugin({}),
     ]
 };

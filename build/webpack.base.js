@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
@@ -47,35 +46,6 @@ module.exports = {
                 include: [path.resolve(__dirname, 'src/')],
                 use: ['file-loader']
             }
-            // {
-            //     // test: /\.(sa|c|sa)ss$/,
-            //     test: /\.s[ac]ss$/,
-            //     // test: /\.css$/,
-            //     use: [
-            //         MiniCssExtractPlugin.loader,
-            //         {
-            //             loader: 'css-loader',
-            //             options: { sourceMap: true }
-            //         },
-            //         {
-            //             loader: 'postcss-loader',
-            //             options: {
-            //                 ident: 'postcss',
-            //                 plugins: [
-            //                     require('autoprefixer')({
-            //                         'browsers': ['>1%', 'last 2 versions']
-            //                     }),
-            //                     require('postcss-cssnext')(),
-            //                     require('cssnano')()
-            //                 ]
-            //             }
-            //         },
-            //         {
-            //             loader: 'sass-loader',
-            //             options: { sourceMap: true }
-            //         }
-            //     ]
-            // }
         ]
     },
     plugins: [
@@ -89,7 +59,6 @@ module.exports = {
                 removeAttributeQuotes: true,
             }
         }),
-        new CleanWebpackPlugin(),
         new VueLoaderPlugin()
     ]
 }
