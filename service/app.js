@@ -97,6 +97,6 @@ app.use(koaStatic(path.join(__dirname, '../publice')));
 app.use(bodyParser);
 // app.use(koaSession(SESSION_CONFIG))
 
-app.listen(9090, () => {
-  console.log("listening on *:9090");
+app.listen(3000, () => {
+  console.log("listening on *:3000");
 });
