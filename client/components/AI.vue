@@ -154,7 +154,7 @@ export default {
               from: "智能机器人",
               content: result.data.content,
               self: false,
-              avatarUrl: "http://omratag7g.bkt.clouddn.com/icon-ai.svg"
+              avatarUrl: require("../assets/images/icons/icon-ai.svg")
             });
           })
           .then(() => {
