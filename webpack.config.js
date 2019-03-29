@@ -63,12 +63,15 @@ module.exports = {
                 }
             }]
         }, {
+            // test: /\.(sa|c|sa)ss$/,
             test: /\.s[ac]ss$/,
             // test: /\.css$/,
             use: [
                 MiniCssExtractPlugin.loader,
-                'css-loader',
-                'sass-loader',
+                {
+                    loader: 'css-loader',
+                    options: { sourceMap: true }
+                },
                 {
                     loader: 'postcss-loader',
                     options: {
@@ -81,6 +84,10 @@ module.exports = {
                             require('cssnano')()
                         ]
                     }
+                },
+                {
+                    loader: 'sass-loader',
+                    options: { sourceMap: true }
                 }
             ]
         }]

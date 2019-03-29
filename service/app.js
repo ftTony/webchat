@@ -25,7 +25,7 @@ router.get("/get-ip", async (ctx, next) => {
 });
 
 
-async function getIp(ip) {
+async function getIp (ip) {
   let response = await request({
     url: "http://apis.juhe.cn/ip/ipNew?ip=" +
       ip +
@@ -35,17 +35,17 @@ async function getIp(ip) {
 }
 
 
-async function getAI(msg) {
+async function getAI (msg) {
   let response = await request({
-    url: "http://api.qingyunke.com/api.php?key=free&appid=0&msg=测试"
+    url: 'http://api.qingyunke.com/api.php?key=free&appid=0&msg=' + encodeURI(msg)
   })
   return response
 }
 
 router.get('/get-ai', async (ctx, next) => {
-  ctx.response.type = "application/json";
-  let result = await getAI('test')
-  console.log(result)
+  ctx.response.type = "application/json"
+  let msg = ctx.request.query.msg || ''
+  let result = await getAI(msg)
   ctx.response.body = result
 })
 

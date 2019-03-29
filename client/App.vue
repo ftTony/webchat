@@ -14,8 +14,9 @@ export default {
   created () {
     localStorage.addr = "未知";
     this.axios.get(`/api/get-ip`).then(result => {
-      if (result) {
-        localStorage.addr = result.Country + result.Province + result.City;
+      let ret = result.data.result
+      if (ret) {
+        localStorage.addr = ret.Country + ret.Province + ret.City;
       }
     });
   }
