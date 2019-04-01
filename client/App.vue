@@ -18,4 +18,10 @@ export default {
 
 <style scoped lang="scss">
 @import "./styles/base.scss";
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 </style>
