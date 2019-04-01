@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <keep-alive>
     <router-view></router-view>
-  </div>
+  </keep-alive>
 </template>
 
 <script>
@@ -12,10 +12,6 @@ export default {
     return {
 
     }
-  },
-  components: {
-    Chatting,
-    Login,
   }
 }
 </script>
