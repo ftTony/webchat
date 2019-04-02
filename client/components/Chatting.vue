@@ -1,20 +1,35 @@
 <template>
   <transition name="slide-left">
     <div class="chatting">
-      <div class="chatting-back">
-        <i
-          @click="$router.push('/AI')"
-          :class="[isRedAI?'icon-back':'icon-back2']"
-        ></i>
+      <div class="chatting-header">
+        <div class="chatting-back">
+          <i
+            @click="$router.push('/AI')"
+            :class="[isRedAI?'icon-back':'icon-back2']"
+          ></i>
+        </div>
+        <div class="chatting-title">
+          <h2><i class="icon-group"></i>群聊</h2>
+        </div>
+        <div class="chatting-menu">
+          <i
+            @click="$router.push('/')"
+            class="icon-menu"
+          ></i>
+        </div>
       </div>
-      <div class="chatting-title">
-        <h2><i class="icon-group"></i>群聊</h2>
-      </div>
-      <div class="chatting-menu">
-        <i
-          @click="$router.push('/')"
-          class="icon-menu"
-        ></i>
+    </div>
+
+    <div
+      class="chatting-content"
+      @click.stop.prevent="isShowEmoji=false"
+      ref="chattingContent"
+    >
+      <div
+        v-for="(item,index) of msgs"
+        :key="index"
+      >
+        <div></div>
       </div>
     </div>
   </transition>
@@ -65,5 +80,12 @@ export default {
 $blue: #2196f3;
 
 .chatting {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .chatting-header {
+  }
 }
 </style>
