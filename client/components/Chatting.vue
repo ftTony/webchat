@@ -18,18 +18,82 @@
           ></i>
         </div>
       </div>
-    </div>
 
-    <div
-      class="chatting-content"
-      @click.stop.prevent="isShowEmoji=false"
-      ref="chattingContent"
-    >
       <div
-        v-for="(item,index) of msgs"
-        :key="index"
+        class="chatting-content"
+        @click.stop.prevent="isShowEmoji=false"
+        ref="chattingContent"
       >
-        <div></div>
+        <div
+          v-for="(item,index) of msgs"
+          :key="index"
+        >
+          <div
+            v-if="item.self"
+            class="chatting-item self clearfix"
+          >
+            <div class="msg-date">
+              {{item.date}}
+            </div>
+            <div class="msg-from">
+              <span class="loc">[{{item.loc}}]</span>
+              <span class="msg-author">{{item.from}}</span>
+              <img
+                :src="item.avatarUrl"
+                alt=""
+              >
+            </div>
+            <div class="msg-content">{{item.content}}</div>
+          </div>
+          <div
+            v-else
+            class="chatting-item other clearfix"
+          >
+            <div class="msg-date">
+              {{ item.date }}
+            </div>
+            <div class="msg-from">
+              <img
+                :src="item.avatarUrl"
+                alt=""
+              >
+              <span class="loc">[{{item.loc}}]</span>
+              <span class="msg-author">{{ item.from }}</span>
+            </div>
+            <div class="msg-content">{{ item.content }}</div>
+          </div>
+        </div>
+      </div>
+      <!-- 输入区域 -->
+      <div class="chatting-input">
+        <transition name="slide-bottom">
+          <div
+            class="emoji-display"
+            v-show="isShowEmoji"
+          >
+            <ul>
+              <li
+                @click="insertText(item)"
+                v-for="(item,index) of emojis"
+                :key="index"
+              >{{item}}</li>
+            </ul>
+          </div>
+        </transition>
+        <div class="emoji">
+          <i
+            @click="showEmoji(isShowEmoji=!isShowEmoji);"
+            class="icon-emoji"
+          ></i>
+        </div>
+        <textarea
+          @keyup.enter="send"
+          @input="newLine"
+          ref="textarea"
+          v-model.trim="inputContent"
+          placeholder="左上角还有智能机器人哦"
+        ></textarea>
+        <button @click="send">发送</button>
       </div>
     </div>
   </transition>
@@ -68,7 +132,7 @@ export default {
     }
   },
   mounted () {
-
+    setInterval(() => this.isRedAI = !this.isRedAI, 2500);
   },
   methods: {
 
