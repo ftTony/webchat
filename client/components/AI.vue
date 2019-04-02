@@ -4,7 +4,22 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      msgs: '',
+      inputContent: '',
+      oContent: {}
+    }
+  },
+  watch: {
+    msgs (val) {
+      localStorage.msgs_api = JSON.stringify(val)
+    }
+  },
+  computed: {
+
+  },
+  beforeRouteEnter (to, from, next) {
+
   }
 }
 </script>
