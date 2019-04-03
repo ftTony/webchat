@@ -1,6 +1,8 @@
 <template>
   <transition name="slide-left">
     <div class="chatting">
+
+      <!-- 聊天界面头部 -->
       <div class="chatting-header">
         <div class="chatting-back">
           <i
@@ -19,6 +21,7 @@
         </div>
       </div>
 
+      <!-- 聊天内容区域 -->
       <div
         class="chatting-content"
         @click.stop.prevent="isShowEmoji=false"
@@ -99,6 +102,8 @@
   </transition>
 </template>
 <script>
+import socket from '../socket';
+
 export default {
   data () {
     return {
@@ -133,9 +138,24 @@ export default {
   },
   mounted () {
     setInterval(() => this.isRedAI = !this.isRedAI, 2500);
+
+    this.oContent = document.querySelector('.chatting-content');
+    this.oContent.scrollTop = this.oContent.scrollHeight;
+
   },
   methods: {
+    send () {
 
+    },
+    showEmoji (flag) {
+
+    },
+    insertText (str) {
+
+    },
+    newLine () {
+      setTimeout(() => this.oTextarea.scrollTop = this.oTextarea.scrollHeight, 0)
+    }
   }
 }
 </script>
@@ -150,6 +170,47 @@ $blue: #2196f3;
   height: 100%;
 
   .chatting-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: $blue;
+    color: white;
+    padding-left: 10px;
+    padding-right: 15px;
+
+    .chatting-back {
+      width: 32px;
+      height: 32px;
+      .icon-back {
+        background: url("../assets/images/icons/icon-ai.svg") no-repeat;
+        background-size: contain;
+      }
+      .icon-back2 {
+        background: url("../assets/images/icons/icon-ai2.svg") no-repeat;
+        background-size: contain;
+      }
+    }
+    .chatting-title {
+      i.icon-group {
+        vertical-align: top;
+        width: 30px;
+        height: 30px;
+        background: url("../assets/images/icons/icon-group.svg") no-repeat;
+        background-size: contain;
+        margin-right: 3px;
+      }
+    }
+
+    .chatting-menu {
+      width: 30px;
+      height: 30px;
+      i.icon-menu {
+        background: url("../assets/images/icons/icon-index.svg") no-repeat;
+        background-size: contain;
+      }
+    }
   }
 }
 </style>
