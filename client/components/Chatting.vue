@@ -212,5 +212,18 @@ $blue: #2196f3;
       }
     }
   }
+
+  .chatting-content {
+    flex: 1;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    .chatting-item {
+      padding: 10px;
+      width: 100%;
+      .msg-date {
+      }
+    }
+  }
 }
 </style>
