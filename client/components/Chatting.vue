@@ -141,7 +141,23 @@ export default {
 
     this.oContent = document.querySelector('.chatting-content');
     this.oContent.scrollTop = this.oContent.scrollHeight;
+    this.oTextarea = document.querySelector('textarea');
 
+    socket.emit('online', this.$store.state.name);
+
+    socket.on('online', (name) => {
+
+    })
+
+    // 接收群群聊消息
+    socket.on('receiveGroupMsg', data => {
+      this.msgs.push(data);
+      setTimeout(() => {
+        this.oContent.scrollTop = this.oContent.scrollHeight;
+      }, 0)
+    });
+
+    this.oContent.scrollTop = this.oContent.scrollHeight;
   },
   methods: {
     send () {
@@ -222,6 +238,16 @@ $blue: #2196f3;
       padding: 10px;
       width: 100%;
       .msg-date {
+        text-align: center;
+        color: gray;
+        font-size: 80%;
+      }
+      .msg-from {
+        display: flex;
+        align-items: center;
+        span.loc {
+          color: gray;
+        }
       }
     }
   }
