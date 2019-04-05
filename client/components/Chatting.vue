@@ -146,7 +146,14 @@ export default {
     socket.emit('online', this.$store.state.name);
 
     socket.on('online', (name) => {
-
+      if (!name) {
+        return;
+      }
+      let oOnline = document.createElement('div');
+      oOnline.className = 'online';
+      oOnline.innerText = name + '上线了';
+      this.oContent.appendChild(oOnline);
+      this.oContent.scrollTop = this.oContent.scrollHeight;
     })
 
     // 接收群群聊消息
@@ -161,13 +168,30 @@ export default {
   },
   methods: {
     send () {
+      this.isShowEmoji = false;
+      if (this.inputContent === '') return
+      socket.emit('sendGroupMsg', {
 
+      })
+      this.msgs.push({
+
+      })
     },
     showEmoji (flag) {
-
+      this.isShowEmoji = flag
     },
     insertText (str) {
+      str = str + ` `;
+      const oTextarea = this.$refs.textarea;
 
+      if (document.selection) {
+
+      } else if (typeof oTextarea.selectionStart === 'number') {
+
+      } else {
+
+      }
+      this.newLine();
     },
     newLine () {
       setTimeout(() => this.oTextarea.scrollTop = this.oTextarea.scrollHeight, 0)
