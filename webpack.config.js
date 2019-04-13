@@ -52,11 +52,12 @@ module.exports = {
                 }
             }]
         }, {
-            // test: /\.s[ac]ss$/,
-            test: /\.css$/,
+            test: /\.s[ac]ss$/,
+            // test: /\.css$/,
             use: [
                 MiniCssExtractPlugin.loader,
                 'css-loader',
+                'sass-loader',
                 {
                     loader: 'postcss-loader',
                     options: {
