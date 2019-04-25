@@ -124,14 +124,12 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-$blue: #2196fe;
-
+$blue: #2196f3;
 .chatting {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-
   .chatting-header {
     display: flex;
     justify-content: space-between;
@@ -139,13 +137,9 @@ $blue: #2196fe;
     height: 50px;
     width: 100%;
     background-color: $blue;
-    height: 50px;
-    width: 100%;
-    background-color: $blue;
     color: white;
     padding-left: 10px;
     padding-right: 15px;
-
     .chatting-back {
       width: 30px;
       height: 30px;
@@ -164,7 +158,6 @@ $blue: #2196fe;
         margin-right: 3px;
       }
     }
-
     .chatting-menu {
       width: 30px;
       height: 30px;
@@ -174,7 +167,6 @@ $blue: #2196fe;
       }
     }
   }
-
   .chatting-content {
     flex: 1;
     width: 100%;
@@ -213,7 +205,6 @@ $blue: #2196fe;
         border-radius: 10px;
       }
     }
-
     .chatting-item + .chatting-item {
       margin-top: 10px;
     }
@@ -226,7 +217,6 @@ $blue: #2196fe;
           margin-left: 10px;
         }
       }
-
       .msg-content {
         float: right;
         word-wrap: break-word;
@@ -236,6 +226,14 @@ $blue: #2196fe;
     }
     .other {
       .msg-from {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        img {
+          margin-right: 10px;
+        }
+      }
+      .msg-content {
         float: left;
         margin-left: 10px;
         word-wrap: break-word;
@@ -253,7 +251,7 @@ $blue: #2196fe;
   .chatting-input {
     display: flex;
     height: 40px;
-    width: 100px;
+    width: 100%;
     input {
       flex: 1;
       padding-left: 10px;
