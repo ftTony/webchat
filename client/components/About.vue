@@ -101,6 +101,22 @@ a{
         background-color:white;
         border-radius:10px;
         padding:30px 10px;
+        box-shadow:0 0 20px gray;
+        overflow:auto;
+
+        h1{
+            text-align:center;
+            font-size:1.2rem;
+            color:#31c27c;
+            transition:.3s ease-in-out;
+        }
+        h1:hover{
+            transform: rotate(15deg);
+            transition: .3s ease-in-out;        
+        }
+        h2{
+            font-size:1.1rem;
+        }
     }
 }
 </style>
