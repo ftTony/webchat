@@ -59,96 +59,117 @@ export default {
   }
 }
 </script>
-<style lang="sass" scoped>
-a{
-    color:#3f51b5;
+<style lang="scss" scoped>
+a {
+  color: #3f51b5;
 }
 
-.about{
-    display:flex;
-    position:absolute;
-    z-index:2;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    width:100%;
-    height:100%;
-    justify-content:center;
-    align-items:center;
-    color: black;
-    .close{
-        position:absolute;
-        z-index:3;
-        display:inline-block;
-        width:30px;
-        height:30px;
-        background:url("../assets/images/icons/close.svg") no-repeat;
-        background-size:contain;
-        top:11%;
-        right:12%;
+.about {
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  .close {
+    position: absolute;
+    z-index: 3;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url("../assets/images/icons/close.svg") no-repeat;
+    background-size: contain;
+    top: 11%;
+    right: 12%;
+  }
+  @media screen and (min-width: 760px) {
+    .close {
+      right: 26%;
     }
-    @media screen and (min-width:760px){
-        .close{
-            right:26%;
-        }
-    }
-    .about-content{
-        position:relative;
-        z-index:2;
-        width:80%;
-        height:80%;
-        background-color:white;
-        border-radius:10px;
-        padding:30px 10px;
-        box-shadow:0 0 20px gray;
-        overflow:auto;
+  }
+  .about-content {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 10px;
+    box-shadow: 0 0 20px gray;
+    overflow: auto;
 
-        h1{
-            text-align:center;
-            font-size:1.2rem;
-            color:#31c27c;
-            transition:.3s ease-in-out;
-        }
-        h1:hover{
-            transform: rotate(15deg);
-            transition: .3s ease-in-out;        
-        }
-        h2{
-            font-size:1.1rem;
-            text-align:center;
-        }
-        p{
-            text-indent:1em;
-            word-break:break-all;
-            margin-top:6px;
+    h1 {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #31c27c;
+      transition: 0.3s ease-in-out;
+    }
+    h1:hover {
+      transform: rotate(15deg);
+      transition: 0.3s ease-in-out;
+    }
+    h2 {
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    p {
+      text-indent: 1em;
+      word-break: break-all;
+      margin-top: 6px;
 
-            b{
-                display:inline-block;
-                transition:.3s ease-in-out;
-            }
-            b:hover{
-                transform:rotate(-10deg);
-                transition:.3s ease-in-out;
-            }
-        }
-        p.copyright{
-            text-indent:0;
-        }
-        div{
-            padding-left: 50px;
-        }
-        .help{
-            padding:0;
-            width:100%;
-            img{
-                width:100%;
-                height:auto;
-            }
-        }
+      b {
+        display: inline-block;
+        transition: 0.3s ease-in-out;
+      }
+      b:hover {
+        transform: rotate(-10deg);
+        transition: 0.3s ease-in-out;
+      }
     }
-    @media screen and (min-width:760px){
-        
+    p.copyright {
+      text-indent: 0;
     }
+    div {
+      padding-left: 50px;
+    }
+    .help {
+      padding: 0;
+      width: 100%;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  @media screen and (min-width: 760px) {
+    .about-content {
+      width: 50% !important;
+    }
+  }
+  .mask {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+  }
+}
+
+.showAbout-enter-active {
+  transition: all 0.4s ease-in-out;
+}
+.showAbout-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.showAbout-enter,
+.showAbout-leave-active {
+  transform: rotateZ(180deg);
+  opacity: 0;
 }
 </style>
