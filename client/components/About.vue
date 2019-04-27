@@ -116,6 +116,20 @@ a{
         }
         h2{
             font-size:1.1rem;
+            text-align:center;
+        }
+        p{
+            text-indent:1em;
+            word-break:break-all;
+            margin-top:6px;
+
+            b{
+                display:inline-block;
+                transition:.3s ease-in-out;
+            }
+            b:hover{
+                transform:rotate(-10deg);
+            }
         }
     }
 }
