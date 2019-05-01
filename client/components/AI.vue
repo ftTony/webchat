@@ -128,5 +128,17 @@ $blue: #2196fe;
 
 .chatting {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .chatting-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: $blue;
+  }
 }
 </style>
