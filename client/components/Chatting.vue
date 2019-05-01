@@ -186,10 +186,21 @@ export default {
 
       if (document.selection) {
 
+        let sel = document.selection.createRange();
+
+        sel.text = str;
+
       } else if (typeof oTextarea.selectionStart === 'number') {
 
+        let startPos = oTextarea.selectionStart;
+        let endPos = oTextarea.selectionEnd;
+        let cursorPos = startPos;
+        let tempVal = oTextarea.value;
+        this.inputContent = tempVal.substring(0, startPos) + str + tempVal.substring(startPos, tempVal.length)
+        cursorPos += str.length;
+        oTextarea.selectionStart = oTextarea.selectionEnd = cursorPos;
       } else {
-
+        oTextarea.value += str;
       }
       this.newLine();
     },
@@ -271,8 +282,83 @@ $blue: #2196f3;
         align-items: center;
         span.loc {
           color: gray;
+          font-size: 60%;
+          margin-right: 5px;
+        }
+        img {
+          margin-right: 10px;
         }
       }
+
+      .msg-content {
+        float: left;
+        margin-left: 10px;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+    }
+
+    .online {
+      width: 200px;
+      margin: 3px auto;
+      border-radius: 4px;
+      text-align: center;
+      background-color: #fffde7;
+    }
+  }
+
+  .chatting-input {
+    position: relative;
+    display: flex;
+    height: 40px;
+    width: 100%;
+    .emoji-display {
+      position: absolute;
+      width: 100%;
+      height: 210px;
+      background-color: white;
+      top: -210px;
+      left: 0;
+      overflow-y: auto;
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          padding: 2px 3px;
+          font-size: 2.2rem;
+        }
+      }
+    }
+    .emoji {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 45px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+      .icon-emoji {
+        width: 40px;
+        height: 100%;
+        background: url("../assets/images/icons/icon-emoji.svg") no-repeat;
+        background-size: contain;
+      }
+    }
+    textarea {
+      flex: 1;
+      resize: none;
+      padding-left: 3px;
+      padding-top: 7px;
+      padding-right: 3px;
+      height: 100%;
+      font-size: 1.4rem;
+    }
+    button {
+      width: 60px;
+      height: 100%;
+      background-color: $blue;
+      color: white;
+      font-size: 16px;
     }
   }
 }

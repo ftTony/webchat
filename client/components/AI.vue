@@ -3,7 +3,11 @@
     <div class="chatting">
 
       <!-- 聊天界面头部 -->
-
+      <div class="chatting-header">
+        <div class="chatting-back">
+          <i class="icon-back"></i>
+        </div>
+      </div>
     </div>
   </transition>
 </template>
