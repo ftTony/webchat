@@ -8,7 +8,8 @@ let prodConfig = {
     mode: 'production',
     output: {
         filename: '[name]_[contenthash:8].js',
-        path: path.resolve(__dirname, 'dist')
+        chunkFilename: '[name].bundle.js', // bundle.js
+        path: path.resolve(__dirname, '../dist/')
     },
     module: {
         rules: [
@@ -43,6 +44,10 @@ let prodConfig = {
         ]
     },
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: `[name]_[contenthash:8].css`,
+            chunkFilename: '[name]_[contenthash:8].css'
+        }),
         new ParallelUglifyPlugin({
             sourceMap: true,
             exclude: /node_modules/,

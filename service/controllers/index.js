@@ -6,7 +6,8 @@ const request = require("request")
 
 const controllers = {
   // 获取IP地址
-  async getIp(ip) {
+  async getIp (ip) {
+    let ip = "120.229.35.63";
     return await request({
       url: "http://apis.juhe.cn/ip/ipNew?ip=" +
         ip +
@@ -14,7 +15,7 @@ const controllers = {
     })
   },
   // 获取聊天信息
-  async getAI(msg) {
+  async getAI (msg) {
     return await request({
       url: 'http://api.qingyunke.com/api.php?key=free&appid=0&msg=' + encodeURI(msg)
     })
