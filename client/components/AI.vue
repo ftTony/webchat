@@ -139,6 +139,84 @@ $blue: #2196fe;
     height: 50px;
     width: 100%;
     background-color: $blue;
+    height: 50px;
+    width: 100%;
+    background-color: $blue;
+    color: white;
+    padding-left: 10px;
+    padding-right: 15px;
+
+    .chatting-back {
+      width: 30px;
+      height: 30px;
+      i.icon-back {
+        background: url("../assets/images/icons/icon-group2.svg") no-repeat;
+        background-size: contain;
+      }
+    }
+    .chatting-title {
+      i.icon-group {
+        vertical-align: top;
+        width: 30px;
+        height: 30px;
+        background: url("../assets/images/icons/icon-group.svg") no-repeat;
+        background-size: contain;
+        margin-right: 3px;
+      }
+    }
+
+    .chatting-menu {
+      width: 30px;
+      height: 30px;
+      i.icon-menu {
+        background: url("../assets/images/icons/icon-index.svg") no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+
+  .chatting-content {
+    flex: 1;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    .chatting-item {
+      padding: 10px;
+      width: 100%;
+      .msg-date {
+        text-align: center;
+        color: gray;
+        font-size: 80%;
+      }
+      .msg-from {
+        display: flex;
+        align-items: center;
+        span.loc {
+          color: gray;
+          font-size: 60%;
+          margin-right: 5px;
+        }
+        .msg-author {
+          font-size: 1.2rem;
+        }
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 15px;
+        }
+      }
+      .msg-content {
+        margin-top: 5px;
+        background-color: white;
+        width: 200px;
+        padding: 6px 10px;
+        border-radius: 10px;
+      }
+    }
+
+    .chatting-item + .chatting-item {
+      margin-top: 10px;
+    }
   }
 }
 </style>
