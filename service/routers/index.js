@@ -4,22 +4,19 @@
 const router = require('koa-router')();
 const controller = require('../controllers/index')
 
-router.get('/get-ip', async (ctx, next) => {
+router.get('/get-ip', async (ctx) => {
   ctx.response.type = "application/json";
-  let str_ip = "120.229.35.63";
-
-  let result = await controller.getIp(str_ip)
-  ctx.response.body = result
-})
-router.get('/get-ai', async (ctx, next) => {
-  ctx.response.type = "application/json";
-  let msg = ctx.request.query.msg || ''
-  let result = await controller.getAI(msg)
+  let result = await controller.getIp()
   ctx.response.body = result
 })
 
-router.get('/', async (ctx, next) => {
+router.get('/get-ai', async (ctx) => {
+  ctx.response.type = "application/json"
+  let result = await controller.getAI()
+  ctx.response.body = result
+})
 
+router.get('/', async (ctx) => {
   ctx.response.body = "<h5>智能聊天系统</h5>";
   //   await ctx.render('index', {
   //     title: '智能聊天系统'
