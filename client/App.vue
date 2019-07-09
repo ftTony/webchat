@@ -8,12 +8,12 @@
 import Chatting from "./components/Chatting.vue";
 import Login from "./components/Login.vue";
 export default {
-  data() {
+  data () {
     return {};
   },
-  created() {
+  created () {
     localStorage.addr = "未知";
-    this.axios.get(`http://localhost:9090/get-ip`).then(result => {
+    this.axios.get(`/api/get-ip`).then(result => {
       if (result) {
         localStorage.addr = result.Country + result.Province + result.City;
       }

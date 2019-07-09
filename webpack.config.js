@@ -16,6 +16,16 @@ module.exports = {
         open: true, //第一次打开浏览器
         hot: true, //是否监听
         historyApiFallback: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:9090/',
+                ws: true,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': '' // 通过pathRewrite重写地址，将前缀/api转为/
+                }
+            }
+        },
         publicPath: "/" //访问的目录
     },
     resolve: {
