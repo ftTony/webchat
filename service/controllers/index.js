@@ -7,7 +7,7 @@ const request = require("request")
 const controllers = {
   // 获取IP地址
   async getIp (ctx) {
-    let ip = "120.229.35.63";
+    let ip = ctx.ip;
     ctx.response.type = "application/json";
     let result = await request({
       url: "http://apis.juhe.cn/ip/ipNew?ip=" +
