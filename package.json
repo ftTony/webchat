@@ -19,5 +19,8 @@
   "devDependencies": {
     "webpack": "^4.40.2",
     "webpack-service": "^0.1.2"
+  },
+  "dependencies": {
+    "socket.io": "^2.2.0"
   }
 }
