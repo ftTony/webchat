@@ -69,10 +69,21 @@
 
 #### 6.1 登录页面
 
+![images](./publice/login.png)
+
 #### 6.2 群聊页面
 
+![images](./publice/chatting.png)
+
 #### 6.3 智能聊天页面
+
+![images](./publice/ai.png)
 
 ### 总结
 
 ### 参考资料
+
+- [Node.js 文档](https://nodejs.org/docs/latest-v11.x/api/)
+- [Koa 文档](https://koajs.com/)
+- [Sockit.io 文档](https://socket.io/)
+- [Vue.js 文档](https://vuejs.org/)
