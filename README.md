@@ -9,7 +9,9 @@
 
 ### 一、需求说明
 
-1.2
+#### 1.1 需求背景
+
+#### 1.2 需求要求
 
 ### 二、安装教程
 
@@ -32,8 +34,16 @@
 
 #### 2.2 如何运行
 
-- 本地运行（开发模式）
-- 服务器上运行
+- 客户端访问
+- 服务器上配置
+
+**客户端运行说明**
+
+访问地址：[http://chat.xiaowuzi.info](http://chat.xiaowuzi.info)
+
+> 请使用 IE8 以上浏览访问或手机访问
+
+**服务器上配置**
 
 #### 2.3 项目配置
 
@@ -45,9 +55,46 @@
 
 ### 三、相关接口
 
+#### 3.1 注册接口
+
+#### 3.2 修改头像
+
+#### 3.3 添加好友
+
+#### 3.4 删除好友
+
+#### 3.5 修改密码
+
+#### 3.6 修改用户名
+
+#### 3.7 重围指定用户密码
+
+#### 3.8 发送消息
+
+#### 3.9 获取联系人历史消息
+
+#### 3.10 获取默认群组的历史消息
+
 ### 四、数据库设计
 
 #### 4.1 用户表
+
+**创建语句**
+
+```
+CREATE TABLE   IF NOT EXISTS  `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `nick` varchar(255) DEFAULT NULL,
+  `detail_info` json DEFAULT NULL,
+  `create_time` varchar(20) DEFAULT NULL,
+  `modified_time` varchar(20) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
 
 ### 五、技术栈
 
