@@ -1,10 +1,10 @@
-import Koa from 'koa'
-import IO from 'koa-socket-2'
-import koaSend from 'koa-send'
-import koaStatic from 'koa-static'
-import bodyParser from 'koa-bodyparser'
-import koaSession from 'koa-session'
-import Busboy from 'busboy'
+const Koa = require('koa');
+const IO = require('koa-socket-2');
+const koaSend = require('koa-send');
+const koaStatic = require('koa-static');
+const bodyParser = require('koa-bodyparser');
+const koaSession = require('koa-session');
+const Busboy = require('busboy');
 
 
 const app = new Koa();
@@ -34,10 +34,25 @@ const SESSION_CONFIG = {
 // 注入应用
 io.attach(app)
 
+io.on('connection', (socket) => {
+    // console.log(socket)
+    // 群聊
+    socket.on('sendGroupMsg', function (data) {
+        socket.broadcast.emit('receiveGroupMsg', data);
+    });
+
+    // 上线
+    socket.on('online', name => {
+        socket.broadcast.emit('online', name)
+    });
+})
+
 app.use(koaSend)
 app.use(koaStatic)
 app.use(bodyParser)
 app.use(Busboy)
-app.use(koaSession(SESSION_CONFIG))
+// app.use(koaSession(SESSION_CONFIG))
 
-app.listen(3000)
+app.listen(9090, () => {
+    console.log('listening on *:9090');
+})

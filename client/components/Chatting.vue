@@ -171,7 +171,7 @@ export default {
       this.isShowEmoji = false;
       if (this.inputContent === '') return
       socket.emit('sendGroupMsg', {
-
+        date: this.moment().format('YYYY-MM-DD HH:mm:ss')
       })
       this.msgs.push({
 

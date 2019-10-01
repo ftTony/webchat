@@ -22,13 +22,13 @@
             @touchstart="isHover=true"
             @touchEnd="isHover=false"
             :class="{hover: isHover}"
-            href="https://fttony.info/"
+            href="https://xiaowuzi.info/"
             target="_blank"
           >microzz</a></p>
         <div class="help">
           <img
-            src="./help.png"
-            alt="microzz.com"
+            src="../assets/images/icons/contact.png"
+            alt=""
           >
         </div>
         <p class="copyright"><b>【声明】</b>：本项目仅供学习交流使用，请不要用作任何商业用途。有任何疑问请联系作者↓ <br>📩：<a href="mailto:172993974@qq.com">172993974@qq.com</a></p>
