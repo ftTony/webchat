@@ -171,11 +171,21 @@ export default {
       this.isShowEmoji = false;
       if (this.inputContent === '') return
       socket.emit('sendGroupMsg', {
-        date: this.moment().format('YYYY-MM-DD HH:mm:ss')
+        date: this.moment().format('YYYY-MM-DD HH:mm:ss'),
+        loc: localStorage.addr,
+        from: `${localStorage.addr}`,
+        content: this.inputContent,
+        avatarUrl: this.avatarUrl
       })
       this.msgs.push({
-
-      })
+        date: this.moment.format('YYYY-MM-DD HH:mm:ss'),
+        loc: localStorage.addr,
+        from: `${localStorage.name}`,
+        content: this.inputContent,
+        self: true,
+        avatarUrl: this.avatarUrl
+      });
+      this.inputContent = ''
     },
     showEmoji (flag) {
       this.isShowEmoji = flag
