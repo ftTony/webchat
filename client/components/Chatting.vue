@@ -178,7 +178,7 @@ export default {
         avatarUrl: this.avatarUrl
       })
       this.msgs.push({
-        date: this.moment.format('YYYY-MM-DD HH:mm:ss'),
+        date: this.moment().format('YYYY-MM-DD HH:mm:ss'),
         loc: localStorage.addr,
         from: `${localStorage.name}`,
         content: this.inputContent,
@@ -295,11 +295,58 @@ $blue: #2196f3;
           font-size: 60%;
           margin-right: 5px;
         }
+        .msg-author {
+          font-size: 1.2rem;
+        }
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 15px;
+        }
+      }
+
+      .msg-content {
+        margin-top: 5px;
+        background-color: white;
+        width: 200px;
+        padding: 6px 10px;
+        border-radius: 10px;
+      }
+    }
+    .chatting-item + .chatting-item {
+      margin-top: 10px;
+    }
+    .self {
+      .msg-from {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        img {
+          margin-left: 10px;
+        }
+      }
+      .msg-content {
+        float: right;
+        word-wrap: break-word;
+        word-break: break-all;
+        margin-right: 10px;
+      }
+    }
+
+    .other {
+      .msg-from {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        span.loc {
+          color: gray;
+          font-size: 60%;
+          margin-right: 5px;
+        }
         img {
           margin-right: 10px;
         }
       }
-
       .msg-content {
         float: left;
         margin-left: 10px;
