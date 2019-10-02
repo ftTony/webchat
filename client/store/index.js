@@ -8,7 +8,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         name: '',
-        avatarUrl: `http://omratag7g.bkt.clouddn.com/icon-avatar${Vue.prototype.random(21)}.svg`,
+        avatarUrl: `../assets/images/icons/icon-avatar${Vue.prototype.random(21)}.svg`,
         addr: '未知',
         isShowAbout: false
     },
