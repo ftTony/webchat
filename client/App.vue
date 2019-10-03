@@ -16,7 +16,7 @@ export default {
   created () {
     localStorage.addr = '未知';
 
-    this.axios.get('https://zhaoplus.com/api/ip').then(result => {
+    this.axios.get(`http://apis.juhe.cn/ip/ipNew?ip=${ip.address()}&key=ed2b36c92c3d48eff07f2fe153fe1ecd`).then(result => {
       if (result.data.content.address) {
         localStorage.addr = result.data.content.address;
       }

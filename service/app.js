@@ -3,9 +3,13 @@ const IO = require('koa-socket-2');
 const koaSend = require('koa-send');
 const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
-const koaSession = require('koa-session');
+// const koaSession = require('koa-session');
 const Busboy = require('busboy');
+const Router = require('koa-router')
+const http = require("http")
+// const send = require('koa-send');
 
+const ip = require('ip')
 
 const app = new Koa();
 
@@ -15,6 +19,18 @@ const io = new IO({
         pingInterval: 5000
     }
 });
+
+let router = new Router()
+
+router.get('/get-ip', async (ctx, next) => {
+    http.request({
+        host: `http://apis.juhe.cn/ip/ipNew?ip=${ip.address()}&key=ed2b36c92c3d48eff07f2fe153fe1ecd`
+    }, (res) => {
+        console.log(res)
+    })
+})
+app.use(router)
+
 
 const SESSION_CONFIG = {
     key: 'koa:sess', /** (string) cookie key (default is koa:sess) */
@@ -46,6 +62,8 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('online', name)
     });
 })
+
+
 
 app.use(koaSend)
 app.use(koaStatic)
