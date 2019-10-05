@@ -6,7 +6,7 @@ const bodyParser = require('koa-bodyparser');
 // const koaSession = require('koa-session');
 const Busboy = require('busboy');
 const Router = require('koa-router')
-const http = require("http")
+const request = require("request")
 // const send = require('koa-send');
 
 const ip = require('ip')
@@ -23,13 +23,14 @@ const io = new IO({
 let router = new Router()
 
 router.get('/get-ip', async (ctx, next) => {
-    http.request({
-        host: `http://apis.juhe.cn/ip/ipNew?ip=${ip.address()}&key=ed2b36c92c3d48eff07f2fe153fe1ecd`
+    let str_ip = ip.address()
+    request.get({
+        url: 'http://apis.juhe.cn/ip/ipNew?ip=' + str_ip + '&key=ed2b36c92c3d48eff07f2fe153fe1ecd'
     }, (res) => {
         console.log(res)
     })
 })
-app.use(router)
+app.use(router.routes())
 
 
 const SESSION_CONFIG = {
