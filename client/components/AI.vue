@@ -1,64 +1,38 @@
 <template>
   <transition name="slide-right">
     <div class="chatting">
-
       <!-- 聊天界面头部 -->
       <div class="chatting-header">
         <div class="chatting-back">
-          <i
-            @click="$router.push('/chatting')"
-            class="icon-back"
-          ></i>
+          <i @click="$router.push('/chatting')" class="icon-back"></i>
         </div>
         <div class="chatting-title">
           <h2>AI 智能机器人</h2>
         </div>
         <div class="chatting-menu">
-          <i
-            @click="$router.push('/')"
-            class="icon-menu"
-          ></i>
+          <i @click="$router.push('/')" class="icon-menu"></i>
         </div>
       </div>
-      <div
-        ref="chattingContent"
-        id="chattingContent"
-        class="chatting-content"
-      >
-        <div
-          v-for="(item,index) of msgs"
-          :key="index"
-        >
-          <div
-            v-if="item.self"
-            class="chatting-tem self clearfix"
-          >
+      <div ref="chattingContent" id="chattingContent" class="chatting-content">
+        <div v-for="(item, index) of msgs" :key="index">
+          <div v-if="item.self" class="chatting-tem self clearfix">
             <div class="msg-date">
-              {{item.date}}
+              {{ item.date }}
             </div>
             <div class="msg-from">
-              <span class="loc">{{item.loc}}</span>
-              <div class="msg-author">{{item.from}}</div>
-              <img
-                :src="item.avatarUrl"
-                alt=""
-              >
+              <span class="loc">{{ item.loc }}</span>
+              <div class="msg-author">{{ item.from }}</div>
+              <img :src="item.avatarUrl" alt="" />
             </div>
-            <div class="msg-content">{{item.content}}</div>
+            <div class="msg-content">{{ item.content }}</div>
           </div>
-          <div
-            v-else
-            class="chatting-item other clearfix"
-          >
-            <div class="msg-date">{{item.date}}</div>
+          <div v-else class="chatting-item other clearfix">
+            <div class="msg-date">{{ item.date }}</div>
             <div class="msg-from">
-              <img
-                :src="item.avatarUrl"
-                alt=""
-              >
-              <span class="msg-author">{{item.from}}</span>
+              <img :src="item.avatarUrl" alt="" />
+              <span class="msg-author">{{ item.from }}</span>
             </div>
-            <div class="msg-content">{{item.content}}</div>
+            <div class="msg-content">{{ item.content }}</div>
           </div>
         </div>
       </div>
@@ -68,7 +42,7 @@
           @keyup.enter="send"
           v-model.trim="inputContent"
           placeholder="与智能机器人聊些啥"
-        >
+        />
         <button @click="send">发送</button>
       </div>
     </div>
@@ -76,76 +50,83 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
-      msgs: localStorage.msgs_ai && JSON.parse(localStorage.msgs_ai) || [
-        // { date: '2015-11-09 09:57:08', from: 'microzz', avatarUrl: `http://omratag7g.bkt.clouddn.com/icon-avatar${this.random(11)}.svg`, content: 'test', self: false}
-      ],
-      inputContent: '',
+      msgs:
+        (localStorage.msgs_ai && JSON.parse(localStorage.msgs_ai)) ||
+        [
+          // { date: '2015-11-09 09:57:08', from: 'microzz', avatarUrl: `http://omratag7g.bkt.clouddn.com/icon-avatar${this.random(11)}.svg`, content: 'test', self: false}
+        ],
+      inputContent: "",
       oContent: {}
-    }
+    };
   },
   watch: {
-    msgs (val) {
-      localStorage.msgs_api = JSON.stringify(val)
+    msgs(val) {
+      localStorage.msgs_api = JSON.stringify(val);
     }
   },
   computed: {
-    name () {
+    name() {
       return this.$store.state.name;
     },
-    avatarUrl () {
+    avatarUrl() {
       return this.$store.state.avatarUrl;
     }
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     if (!localStorage.name) {
-      next('/')
+      next("/");
     } else {
-      next()
+      next();
     }
   },
-  mounted () {
-    this.oContent = document.getElementById('chattingContent');
+  mounted() {
+    this.oContent = document.getElementById("chattingContent");
     setTimeout(() => {
-      this.$refs.chattingContent.scrollTop = this.$refs.chattingContent.scrollHeight
-    }, 0)
+      this.$refs.chattingContent.scrollTop = this.$refs.chattingContent.scrollHeight;
+    }, 0);
   },
   methods: {
-    send () {
+    send() {
       this.oContent.scrollTop = this.oContent.scrollHeight;
-      if (this.inputContent === '') {
+      if (this.inputContent === "") {
         return;
       } else {
         this.msgs.push({
-          date:this.moment().format('MM-DD HH:mm:sss'),
-          loc:localStorage.addr,
-          from:`${localStorage.name}`,
-          content:this.inputContent,
-          self:true,
-          avatarUrl:this.avatarUrl
+          date: this.moment().format("MM-DD HH:mm:sss"),
+          loc: localStorage.addr,
+          from: `${localStorage.name}`,
+          content: this.inputContent,
+          self: true,
+          avatarUrl: this.avatarUrl
         });
-        setTimeout(()=>{
-          this.$refs.chattingContent.scrollTop = this.$refs.chattingContent.scrollHeight
-        },0)
+        setTimeout(() => {
+          this.$refs.chattingContent.scrollTop = this.$refs.chattingContent.scrollHeight;
+        }, 0);
 
-        this.axios.get(`https://zhaoplus.com/api/AI?search=${this.inputContent}&userid=${localStorage.name+localStorage.addr}&loc=${localStorage.addr}`).then(result=>{
-          this.msgs.push({
-            date:this.moment().format('MM-DD HH:mm:ss'),
-            from:'智能机器人',
-            content:result.data.result.text,
-            self:false,
-            avatarUrl:'http://omratag7g.bkt.clouddn.com/icon-ai.svg'
+        this.axios
+          .get(
+            `http://api.qingyunke.com/api.php?key=free&appid=0&msg=${this.inputContent}`
+          )
+          .then(result => {
+            this.msgs.push({
+              date: this.moment().format("MM-DD HH:mm:ss"),
+              from: "智能机器人",
+              content: result.data.result.text,
+              self: false,
+              avatarUrl: "http://omratag7g.bkt.clouddn.com/icon-ai.svg"
+            });
           })
-        }).then(()=>{
-          this.$refs.chattingContent.scrollTop=this.$refs.chattingContent.scrollHeight
-        })
+          .then(() => {
+            this.$refs.chattingContent.scrollTop = this.$refs.chattingContent.scrollHeight;
+          });
 
-        this.inputContent='';
+        this.inputContent = "";
       }
     }
   }
-}
+};
 </script>
 <style scoped lang="scss">
 $blue: #2196f3;

@@ -7,8 +7,6 @@ const router = require("koa-router")();
 const request = require("request");
 // const send = require('koa-send');
 
-const ip = require("ip");
-
 const app = new Koa();
 
 const io = new IO({
@@ -20,23 +18,37 @@ const io = new IO({
 
 router.get("/get-ip", async (ctx, next) => {
   ctx.response.type = "application/json";
-  ctx.response.body = {
-    code: 0,
-    data: {
-      city: "深圳"
-    }
-  };
-  let str_ip = ip.address();
-  request(
-    {
-      url:
-        "http://apis.juhe.cn/ip/ipNew?ip=120.229.35.63&key=ed2b36c92c3d48eff07f2fe153fe1ecd"
-    },
-    (err, httpResponse, body) => {
-      console.log(body);
-    }
-  );
+  let str_ip = "120.229.35.63";
+
+  let result = await getIp(str_ip)
+  ctx.response.body = result
 });
+
+
+async function getIp(ip) {
+  let response = await request({
+    url: "http://apis.juhe.cn/ip/ipNew?ip=" +
+      ip +
+      "&key=ed2b36c92c3d48eff07f2fe153fe1ecd"
+  })
+  return response
+}
+
+
+async function getAI(msg) {
+  let response = await request({
+    url: "http://api.qingyunke.com/api.php?key=free&appid=0&msg=测试"
+  })
+  return response
+}
+
+router.get('/get-ai', async (ctx, next) => {
+  ctx.response.type = "application/json";
+  let result = await getAI('test')
+  console.log(result)
+  ctx.response.body = result
+})
+
 
 router.get("/", async (ctx, next) => {
   ctx.response.body = "<h5>智能聊天系统</h5>";
@@ -71,7 +83,7 @@ io.attach(app);
 io.on("connection", socket => {
   // console.log(socket)
   // 群聊
-  socket.on("sendGroupMsg", function(data) {
+  socket.on("sendGroupMsg", function (data) {
     socket.broadcast.emit("receiveGroupMsg", data);
   });
 
