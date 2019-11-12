@@ -1,9 +1,10 @@
 var webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
-const ClearWebpackPlugin = require('clean-webpack-plugin');
+// const ClearWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 module.exports = {
     entry: './client/main.js',
@@ -73,7 +74,7 @@ module.exports = {
         }]
     },
     plugins: [
-        new ClearWebpackPlugin(),
+        // new ClearWebpackPlugin(),
         new ParallelUglifyPlugin({
             sourceMap: true,
             exclude: /node_modules/,
@@ -99,7 +100,7 @@ module.exports = {
         new VueLoaderPlugin(),
         //将js自动插入到html里
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './client/index.html',
             filename: 'index.html',
         }),
         new webpack.HotModuleReplacementPlugin() //引入热更新插件
