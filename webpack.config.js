@@ -15,6 +15,7 @@ module.exports = {
         compress: true,
         open: true, //第一次打开浏览器
         hot: true, //是否监听
+        historyApiFallback: true,
         publicPath: "/" //访问的目录
     },
     resolve: {
