@@ -1,8 +1,10 @@
-import Koa from 'koa';
+import Koa from 'koa'
 import IO from 'koa-socket-2'
-import koaSend from 'koa-send';
-import koaStatic from 'koa-static';
-import path from 'path';
+import koaSend from 'koa-send'
+import koaStatic from 'koa-static'
+import bodyParser from 'koa-bodyparser'
+import Busboy from 'busboy'
+
 
 const app = new Koa();
 
@@ -14,6 +16,9 @@ const io = new IO({
 });
 
 // 注入应用
-io.attach(app);
+io.attach(app)
 
-export default app;
+app.use(koaSend)
+app.use(koaStatic)
+app.use(bodyParser)
+app.use(Busboy)
