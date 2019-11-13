@@ -237,7 +237,35 @@ $blue: #2196fe;
     .other {
       .msg-from {
         float: left;
+        margin-left: 10px;
+        word-wrap: break-word;
+        word-break: break-all;
       }
+    }
+    .online {
+      width: 200px;
+      margin: 3px auto;
+      border-radius: 4px;
+      text-align: center;
+      background-color: #fffde7;
+    }
+  }
+  .chatting-input {
+    display: flex;
+    height: 40px;
+    width: 100px;
+    input {
+      flex: 1;
+      padding-left: 10px;
+      height: 100%;
+      font-size: 1.3rem;
+    }
+    button {
+      width: 60px;
+      height: 100%;
+      background-color: $blue;
+      color: white;
+      font-size: 1.2rem;
     }
   }
 }
