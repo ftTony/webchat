@@ -217,6 +217,28 @@ $blue: #2196fe;
     .chatting-item + .chatting-item {
       margin-top: 10px;
     }
+    .self {
+      .msg-from {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        img {
+          margin-left: 10px;
+        }
+      }
+
+      .msg-content {
+        float: right;
+        word-wrap: break-word;
+        word-break: break-all;
+        margin-right: 10px;
+      }
+    }
+    .other {
+      .msg-from {
+        float: left;
+      }
+    }
   }
 }
 </style>
