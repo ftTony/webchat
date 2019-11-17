@@ -117,7 +117,31 @@ export default {
       if (this.inputContent === '') {
         return;
       } else {
+        this.msgs.push({
+          date:this.moment().format('MM-DD HH:mm:sss'),
+          loc:localStorage.addr,
+          from:`${localStorage.name}`,
+          content:this.inputContent,
+          self:true,
+          avatarUrl:this.avatarUrl
+        });
+        setTimeout(()=>{
+          this.$refs.chattingContent.scrollTop = this.$refs.chattingContent.scrollHeight
+        },0)
 
+        this.axios.get(`https://zhaoplus.com/api/AI?search=${this.inputContent}&userid=${localStorage.name+localStorage.addr}&loc=${localStorage.addr}`).then(result=>{
+          this.msgs.push({
+            date:this.moment().format('MM-DD HH:mm:ss'),
+            from:'智能机器人',
+            content:result.data.result.text,
+            self:false,
+            avatarUrl:'http://omratag7g.bkt.clouddn.com/icon-ai.svg'
+          })
+        }).then(()=>{
+          this.$refs.chattingContent.scrollTop=this.$refs.chattingContent.scrollHeight
+        })
+
+        this.inputContent='';
       }
     }
   }
