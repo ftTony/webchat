@@ -1,12 +1,12 @@
 const Koa = require("koa");
 const IO = require("koa-socket-2");
-// const koaStatic = require("koa-static");
-// const bodyParser = require("koa-bodyparser");
-// const Busboy = require("busboy");
-const router = require("koa-router")();
-const request = require("request");
+const koaStatic = require("koa-static");
+const bodyParser = require("koa-bodyparser");
+// const router = require("koa-router")();
+const routers = require('./routers/index');
+// const request = require("request");
 // const send = require('koa-send');
-
+const path = require('path');
 const app = new Koa();
 
 const io = new IO({
@@ -16,45 +16,45 @@ const io = new IO({
   }
 });
 
-router.get("/get-ip", async (ctx, next) => {
-  ctx.response.type = "application/json";
-  let str_ip = "120.229.35.63";
+// router.get("/get-ip", async (ctx, next) => {
+//   ctx.response.type = "application/json";
+//   let str_ip = "120.229.35.63";
 
-  let result = await getIp(str_ip)
-  ctx.response.body = result
-});
-
-
-async function getIp (ip) {
-  let response = await request({
-    url: "http://apis.juhe.cn/ip/ipNew?ip=" +
-      ip +
-      "&key=ed2b36c92c3d48eff07f2fe153fe1ecd"
-  })
-  return response
-}
+//   let result = await getIp(str_ip)
+//   ctx.response.body = result
+// });
 
 
-async function getAI (msg) {
-  let response = await request({
-    url: 'http://api.qingyunke.com/api.php?key=free&appid=0&msg=' + encodeURI(msg)
-  })
-  return response
-}
-
-router.get('/get-ai', async (ctx, next) => {
-  ctx.response.type = "application/json"
-  let msg = ctx.request.query.msg || ''
-  let result = await getAI(msg)
-  ctx.response.body = result
-})
+// async function getIp(ip) {
+//   let response = await request({
+//     url: "http://apis.juhe.cn/ip/ipNew?ip=" +
+//       ip +
+//       "&key=ed2b36c92c3d48eff07f2fe153fe1ecd"
+//   })
+//   return response
+// }
 
 
-router.get("/", async (ctx, next) => {
-  ctx.response.body = "<h5>智能聊天系统</h5>";
-});
+// async function getAI(msg) {
+//   let response = await request({
+//     url: 'http://api.qingyunke.com/api.php?key=free&appid=0&msg=' + encodeURI(msg)
+//   })
+//   return response
+// }
 
-app.use(router.routes());
+// router.get('/get-ai', async (ctx, next) => {
+//   ctx.response.type = "application/json"
+//   let msg = ctx.request.query.msg || ''
+//   let result = await getAI(msg)
+//   ctx.response.body = result
+// })
+
+
+// router.get("/", async (ctx, next) => {
+//   ctx.response.body = "<h5>智能聊天系统</h5>";
+// });
+
+app.use(routers.routes()).use(routers.allowedMethods());
 
 const SESSION_CONFIG = {
   key: "koa:sess",
@@ -93,9 +93,8 @@ io.on("connection", socket => {
   });
 });
 
-// app.use(koaStatic);
-// app.use(bodyParser);
-// app.use(Busboy);
+app.use(koaStatic(path.join(__dirname, '../publice')));
+app.use(bodyParser);
 // app.use(koaSession(SESSION_CONFIG))
 
 app.listen(9090, () => {

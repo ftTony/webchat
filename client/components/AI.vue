@@ -1,77 +1,49 @@
 <template>
   <transition name="slide-right">
     <div class="chatting">
-
       <!-- 聊天界面头部 -->
       <div class="chatting-header">
-
         <div class="chatting-back">
-          <i
-            @click="$router.push('/chatting')"
-            class="icon-back"
-          ></i>
+          <i @click="$router.push('/chatting')" class="icon-back"></i>
         </div>
         <div class="chatting-title">
           <h2>AI 智能机器人</h2>
         </div>
         <div class="chatting-menu">
-          <i
-            @click="$router.push('/')"
-            class="icon-menu"
-          ></i>
+          <i @click="$router.push('/')" class="icon-menu"></i>
         </div>
-
       </div>
 
       <!-- 聊天内容区域 -->
-      <div
-        ref="chattingContent"
-        id="chattingContent"
-        class="chatting-content"
-      >
-
-        <div v-for="item of msgs">
-          <div
-            v-if="item.self"
-            class="chatting-item self clearfix"
-          >
+      <div ref="chattingContent" id="chattingContent" class="chatting-content">
+        <div v-for="(item, index) of msgs" :key="index">
+          <div v-if="item.self" class="chatting-item self clearfix">
             <div class="msg-date">
               {{ item.date }}
             </div>
             <div class="msg-from">
-              <span class="loc">[{{item.loc}}]</span>
-              <span class="msg-author">{{ item.from}}</span>
-              <img
-                :src="item.avatarUrl"
-                alt=""
-              >
+              <span class="loc">[{{ item.loc }}]</span>
+              <span class="msg-author">{{ item.from }}</span>
+              <img :src="item.avatarUrl" alt="" />
             </div>
             <div class="msg-content">{{ item.content }}</div>
           </div>
 
-          <div
-            v-else
-            class="chatting-item other clearfix"
-          >
+          <div v-else class="chatting-item other clearfix">
             <div class="msg-date">
               {{ item.date }}
             </div>
             <div class="msg-from">
-              <img
-                :src="item.avatarUrl"
-                alt=""
-              >
+              <img :src="item.avatarUrl" alt="" />
               <span class="msg-author">{{ item.from }}</span>
             </div>
             <div class="msg-content">{{ item.content }}</div>
           </div>
-
         </div>
 
         <!-- <div class="online">
           microzz上线了
         </div> -->
-
       </div>
 
       <!-- 输入区域 -->
@@ -80,16 +52,15 @@
           @keyup.enter="send"
           v-model.trim="inputContent"
           placeholder="与智能机器人聊些啥"
-        >
+        />
         <button @click="send">发送</button>
       </div>
-
     </div>
   </transition>
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       msgs:
         (localStorage.msgs_ai && JSON.parse(localStorage.msgs_ai)) ||
@@ -101,33 +72,33 @@ export default {
     };
   },
   watch: {
-    msgs (val) {
+    msgs(val) {
       localStorage.msgs_api = JSON.stringify(val);
     }
   },
   computed: {
-    name () {
+    name() {
       return this.$store.state.name;
     },
-    avatarUrl () {
+    avatarUrl() {
       return this.$store.state.avatarUrl;
     }
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     if (!localStorage.name) {
       next("/");
     } else {
       next();
     }
   },
-  mounted () {
+  mounted() {
     this.oContent = document.getElementById("chattingContent");
     setTimeout(() => {
       this.$refs.chattingContent.scrollTop = this.$refs.chattingContent.scrollHeight;
     }, 0);
   },
   methods: {
-    send () {
+    send() {
       this.oContent.scrollTop = this.oContent.scrollHeight;
       if (this.inputContent === "") {
         return;
@@ -145,9 +116,7 @@ export default {
         }, 0);
 
         this.axios
-          .get(
-            `/api/get-ai?msg=${this.inputContent}`
-          )
+          .get(`/api/get-ai?msg=${this.inputContent}`)
           .then(result => {
             this.msgs.push({
               date: this.moment().format("MM-DD HH:mm:ss"),
