@@ -3,10 +3,10 @@ const IO = require("koa-socket-2");
 const koaStatic = require("koa-static");
 const bodyParser = require("koa-bodyparser");
 // const router = require("koa-router")();
-const routers = require('./routers/index');
+const routers = require("./routers/index");
 // const request = require("request");
 // const send = require('koa-send');
-const path = require('path');
+const path = require("path");
 const app = new Koa();
 
 const io = new IO({
@@ -24,7 +24,6 @@ const io = new IO({
 //   ctx.response.body = result
 // });
 
-
 // async function getIp(ip) {
 //   let response = await request({
 //     url: "http://apis.juhe.cn/ip/ipNew?ip=" +
@@ -33,7 +32,6 @@ const io = new IO({
 //   })
 //   return response
 // }
-
 
 // async function getAI(msg) {
 //   let response = await request({
@@ -48,7 +46,6 @@ const io = new IO({
 //   let result = await getAI(msg)
 //   ctx.response.body = result
 // })
-
 
 // router.get("/", async (ctx, next) => {
 //   ctx.response.body = "<h5>智能聊天系统</h5>";
@@ -83,7 +80,7 @@ io.attach(app);
 io.on("connection", socket => {
   // console.log(socket)
   // 群聊
-  socket.on("sendGroupMsg", function (data) {
+  socket.on("sendGroupMsg", function(data) {
     socket.broadcast.emit("receiveGroupMsg", data);
   });
 
@@ -93,10 +90,10 @@ io.on("connection", socket => {
   });
 });
 
-app.use(koaStatic(path.join(__dirname, '../public')));
+app.use(koaStatic(path.join(__dirname, "../public")));
 app.use(bodyParser());
 // app.use(koaSession(SESSION_CONFIG))
-
+app.proxy = true;
 app.listen(9090, () => {
   console.log("listening on *:9090");
 });
